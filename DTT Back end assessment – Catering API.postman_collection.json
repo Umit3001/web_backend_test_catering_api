@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "3e8ed6e8-d980-4efb-9635-f80545b44014",
+		"name": "DTT Back end assessment – Catering API",
+		"description": "The Postman collection for the DTT backend assessment test: Catering API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34242260"
+	},
+	"item": [
+		{
+			"name": "Test API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"test"
+					]
+				},
+				"description": "API call used to test local development environment and database connection.\n\nShould print _'Hello World!'_ if all is OK."
+			},
+			"response": []
+		},
+		{
+			"name": "Create facility (TODO)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city\": \"heemstede\",\r\n    \"address\": \"aaaa\",\r\n    \"zip_code\": \"2346bb\",\r\n    \"country_code\": \"NL\",\r\n    \"phone_number\": \"+31123456789\",\r\n    \"name\": \"dekamarkt\",\r\n    \"tags\": [\r\n        {\"name\": \"aaa\"},\r\n        {\"name\": \"Shopping\"}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/createfacility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"createfacility"
+					]
+				},
+				"description": "Creates a facility..."
+			},
+			"response": []
+		},
+		{
+			"name": "Read One Facility",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/readonefacility?facility_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"readonefacility"
+					],
+					"query": [
+						{
+							"key": "facility_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Facility",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"facility_id\": 26,\r\n    \"city\": \"heemstede\",\r\n    \"address\": \"address\",\r\n    \"zip_code\": \"2467AA\",\r\n    \"country_code\": \"NL\",\r\n    \"phone_number\": \"+3134567902\",\r\n    \"name\": \"Deka\",\r\n    \"tags\": [\r\n        {\"name\": \"kaas\"},\r\n        {\"name\": \"Shopping\"}\r\n\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/updatefacility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"updatefacility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Facility",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"facility_id\" : \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/deletefacility",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"deletefacility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Facility",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/web_backend_test_catering_api/searchfacility?tag_name=cen&facility_name=dtt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"web_backend_test_catering_api",
+						"searchfacility"
+					],
+					"query": [
+						{
+							"key": "tag_name",
+							"value": "cen"
+						},
+						{
+							"key": "facility_name",
+							"value": "dtt"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost/web_backend_test_catering_api",
+			"type": "string"
+		}
+	]
+}
