@@ -28,6 +28,7 @@ class LocationRepository extends DatabaseConnection {
         return $location->location_id;
     }
 
+    #delete a location by location_id
     public function deleteLocation($location_id) {
         $statement = $this->connection->prepare("DELETE FROM location WHERE location_id = :location_id");
         $statement->bindParam(':location_id', $location_id);

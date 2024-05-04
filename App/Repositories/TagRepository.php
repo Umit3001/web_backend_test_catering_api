@@ -26,6 +26,7 @@ class TagRepository extends DatabaseConnection {
         }
     }
 
+    
     public function createFacilityTags($facility_id, $tag_id) {
         $statement = $this->connection->prepare("INSERT INTO facility_tags (facility_id, tag_id) VALUES (:facility_id, :tag_id)");
         $statement->bindParam(':facility_id', $facility_id);

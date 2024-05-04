@@ -18,6 +18,7 @@ class FacilityRepository extends DatabaseConnection
     #get a facility by facility_id
     public function getFacilityById($facility_id) {
 
+        #joins facility, location, facility_tags and tags tables to get all the information about a facility
         $statement = $this->connection->prepare("
             SELECT facility.*, location.*, GROUP_CONCAT(tags.name) as tag_names
             FROM facility
