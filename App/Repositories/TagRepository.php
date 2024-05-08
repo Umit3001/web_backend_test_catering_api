@@ -30,7 +30,7 @@ class TagRepository extends Injectable {
             $statement = $this->db->getConnection()->prepare("INSERT INTO tags (name) VALUES (:name)");
             $statement->bindParam(':name', $tags->name);
             $statement->execute();
-            return $this->connection->lastInsertId();
+            return $this->db->getConnection()->lastInsertId();
         }
     }
 
