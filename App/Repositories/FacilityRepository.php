@@ -1,25 +1,33 @@
 <?php
 namespace App\Repositories;
+use App\Plugins\Di\Injectable;
 use PDO;
 use App\Model\Facility;
 
-class FacilityRepository extends DatabaseConnection
+class FacilityRepository extends Injectable
 {
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = $this->getDI()->getShared('db'); 
+    }
+
     #create a facility and return the facility_id
     public function createFacility($facility) {
 
-        $statement = $this->connection->prepare("INSERT INTO facility (location_id, name) VALUES (:location_id, :name)");
+        $statement = $this->db->getConnection()->prepare("INSERT INTO facility (location_id, name) VALUES (:location_id, :name)");
         $statement->bindParam(':location_id', $facility->location_id);
         $statement->bindParam(':name', $facility->name);
         $statement->execute();
-        return $this->connection->lastInsertId();
+        return $this->db->getConnection()->lastInsertId();
     }
 
     #get a facility by facility_id
     public function getFacilityById($facility_id) {
 
         #joins facility, location, facility_tags and tags tables to get all the information about a facility
-        $statement = $this->connection->prepare("
+        $statement = $this->db->getConnection()->prepare("
             SELECT facility.*, location.*, GROUP_CONCAT(tags.name) as tag_names
             FROM facility
             INNER JOIN location ON facility.location_id = location.location_id
@@ -43,7 +51,7 @@ class FacilityRepository extends DatabaseConnection
     #update a facility
     public function updateFacility($facility) {
 
-        $statement = $this->connection->prepare("UPDATE facility SET location_id = :location_id, name = :name WHERE facility_id = :facility_id");
+        $statement = $this->db->getConnection()->prepare("UPDATE facility SET location_id = :location_id, name = :name WHERE facility_id = :facility_id");
         $statement->bindParam(':location_id', $facility->location_id);
         $statement->bindParam(':name', $facility->name);
         $statement->bindParam(':facility_id', $facility->facility_id);
@@ -54,7 +62,7 @@ class FacilityRepository extends DatabaseConnection
     #delete a facility by facility_id
     public function deleteFacilityById($facility_id) {
 
-        $statement = $this->connection->prepare("DELETE FROM facility WHERE facility_id = :facility_id");
+        $statement = $this->db->getConnection()->prepare("DELETE FROM facility WHERE facility_id = :facility_id");
         $statement->bindParam(':facility_id', $facility_id);
         $statement->execute();
     }
@@ -90,7 +98,7 @@ class FacilityRepository extends DatabaseConnection
 
         $query .= " GROUP BY facility.facility_id";
 
-        $statement = $this->connection->prepare($query);
+        $statement = $this->db->getConnection()->prepare($query);
 
         #binds the search parameters
         if (isset($search['facility_name'])) {
